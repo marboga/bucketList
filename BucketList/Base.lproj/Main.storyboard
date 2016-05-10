@@ -81,16 +81,27 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNf-jr-gfF">
-                                                    <rect key="frame" x="8" y="8" width="584" height="17"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gNf-jr-gfF" secondAttribute="trailing" constant="-8" id="B9q-jb-Sx4"/>
+                                                <constraint firstItem="gNf-jr-gfF" firstAttribute="leading" secondItem="wTn-OQ-Mra" secondAttribute="leadingMargin" constant="-8" id="Ic4-aT-wQL"/>
+                                                <constraint firstItem="gNf-jr-gfF" firstAttribute="top" secondItem="wTn-OQ-Mra" secondAttribute="topMargin" constant="-8" id="a3p-ud-Zb2"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="gNf-jr-gfF" secondAttribute="trailing" id="hJP-0R-MJH"/>
                                                 <constraint firstItem="gNf-jr-gfF" firstAttribute="leading" secondItem="wTn-OQ-Mra" secondAttribute="leadingMargin" id="joN-Lm-hlD"/>
                                                 <constraint firstItem="gNf-jr-gfF" firstAttribute="top" secondItem="wTn-OQ-Mra" secondAttribute="topMargin" id="uss-HF-Z04"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="gNf-jr-gfF" secondAttribute="bottom" constant="-8" id="zCS-N1-PJs"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="hJP-0R-MJH"/>
+                                                    <exclude reference="joN-Lm-hlD"/>
+                                                    <exclude reference="uss-HF-Z04"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
