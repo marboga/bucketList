@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 class BucketListViewController: UITableViewController, CancelButtonDelegate, MissionDetailsViewControllerDelegate {
     var segueEditMode = false
-    var missions = ["Sky diving", "Live in Hawaii"]
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var missions = [Mission]()
     func cancelButtonPressedFrom(controller: UIViewController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("preparingForSegue")
         let navigationController = segue.destinationViewController as! UINavigationController
         let controller = navigationController.topViewController as! MissionDetailsViewController
         controller.cancelButtonDelegate = self
@@ -22,27 +25,51 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         //set which we want to edit:
         if segueEditMode == true {
             if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                controller.missionToEdit = missions[indexPath.row]
+                controller.missionToEdit = missions[indexPath.row].details
                 controller.missionToEditIndexPath = indexPath.row
             }
             segueEditMode = false
         }
     }
-    func missionDetailsViewController(controller: MissionDetailsViewController, didFinishAddingMission mission: String) {
+    func missionDetailsViewController(controller: MissionDetailsViewController, didFinishAddingMission missionText: String) {
         dismissViewControllerAnimated(true, completion: nil)
-        missions.append(mission)
+        print(missionText, "missionText", missions)
+//THIS will create a new one
+        let entity = NSEntityDescription.entityForName("Mission", inManagedObjectContext: managedObjectContext)
+        let mission = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedObjectContext)
+        mission.setValue(missionText, forKey: "details")
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+                
+                print("success!")
+            } catch {
+                print("\(error)")
+            }
+        }
+        fetchAllMissions()
         tableView.reloadData()
+    }
+    func fetchAllMissions() {
+        let userRequest = NSFetchRequest(entityName: "Mission")
+        do {
+        let results = try managedObjectContext.executeFetchRequest(userRequest)
+        missions = results as! [Mission]
+        
+        } catch {
+        print("\(error)")
+        }
     }
     func missionDetailsViewController(controller: MissionDetailsViewController, didFinishEditingMission mission: String, atIndexPath indexPath: Int) {
         print("attempting to finish editing")
         dismissViewControllerAnimated(true, completion: nil)
         missions.removeAtIndex(indexPath)
-        missions.insert(mission, atIndex: indexPath)
+//        missions.insert(mission, atIndex: indexPath)
         tableView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        fetchAllMissions()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -52,7 +79,7 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         // dequeue the cell from our storyboard
         let cell = tableView.dequeueReusableCellWithIdentifier("MissionCell")!
         // if the cell has a text label, set it to the model that is corresponding to the row in array
-        cell.textLabel?.text = missions[indexPath.row]
+        cell.textLabel?.text = missions[indexPath.row].details
         // return cell so that Table View knows what to draw in each row
         return cell
     }

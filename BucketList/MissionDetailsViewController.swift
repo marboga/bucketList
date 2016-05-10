@@ -17,7 +17,7 @@ class MissionDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newMissionTextField.text = missionToEdit
+//        newMissionTextField.text = missionToEdit
     }
     
     @IBAction func cancelBarButtonPressed(sender: UIBarButtonItem){
@@ -25,20 +25,15 @@ class MissionDetailsViewController: UITableViewController {
     }
     
     @IBAction func doneBarButtonPressed(sender: UIBarButtonItem) {
-        print("made it 1")
         // if we are editing then run the "didFinishEditingMission" method
         if var mission = missionToEdit {
             print("made it 2", missionToEdit, missionToEditIndexPath, newMissionTextField.text)
             mission = newMissionTextField.text!
-            print("made it 6")
             delegate?.missionDetailsViewController(self, didFinishEditingMission: mission, atIndexPath: missionToEditIndexPath!)
         } else { // we are adding so run the "didFinishAddingMission" method
-            print("made it 3")
             let mission = newMissionTextField.text!
-            print("made it 5")
             delegate?.missionDetailsViewController(self, didFinishAddingMission: mission)
         }
-        print("made it 4")
     }
     
 }
