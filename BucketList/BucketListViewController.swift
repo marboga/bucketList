@@ -9,21 +9,23 @@
 import UIKit
 
 class BucketListViewController: UITableViewController, CancelButtonDelegate, MissionDetailsViewControllerDelegate {
+    var segueEditMode = false
     var missions = ["Sky diving", "Live in Hawaii"]
     func cancelButtonPressedFrom(controller: UIViewController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! MissionDetailsViewController
-            controller.cancelButtonDelegate = self
-            controller.delegate = self
-            //set which we want to edit:
-            if segue.identifier == "EditMission" {
-                if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                    controller.missionToEdit = missions[indexPath.row]
-                    controller.missionToEditIndexPath = indexPath.row
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let controller = navigationController.topViewController as! MissionDetailsViewController
+        controller.cancelButtonDelegate = self
+        controller.delegate = self
+        //set which we want to edit:
+        if segueEditMode == true {
+            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+                controller.missionToEdit = missions[indexPath.row]
+                controller.missionToEditIndexPath = indexPath.row
             }
+            segueEditMode = false
         }
     }
     func missionDetailsViewController(controller: MissionDetailsViewController, didFinishAddingMission mission: String) {
@@ -63,7 +65,12 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
     }
     //edit
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("EditMission", sender: tableView.cellForRowAtIndexPath(indexPath))
+        segueEditMode = true
+        performSegueWithIdentifier("DetailsSegue", sender: tableView.cellForRowAtIndexPath(indexPath))
+        
+    }
+    @IBAction func addBarButtonPressed(sender: UIBarButtonItem) {
+        performSegueWithIdentifier("DetailsSegue", sender: UIBarButtonItem.self)
     }
 
 }
