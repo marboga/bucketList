@@ -14,20 +14,15 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         dismissViewControllerAnimated(true, completion: nil)
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "AddNewMission" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let controller = navigationController.topViewController as! MissionDetailsViewController
-            controller.cancelButtonDelegate = self
-            controller.delegate = self
-        } else if segue.identifier == "EditMission" {
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! MissionDetailsViewController
             controller.cancelButtonDelegate = self
             controller.delegate = self
             //set which we want to edit:
-            if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                controller.missionToEdit = missions[indexPath.row]
-                controller.missionToEditIndexPath = indexPath.row
+            if segue.identifier == "EditMission" {
+                if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+                    controller.missionToEdit = missions[indexPath.row]
+                    controller.missionToEditIndexPath = indexPath.row
             }
         }
     }
@@ -66,6 +61,7 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         missions.removeAtIndex(indexPath.row)
         tableView.reloadData()
     }
+    //edit
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("EditMission", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
