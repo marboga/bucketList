@@ -15,6 +15,9 @@
 		A61E98221CE1038A00B5B7A5 /* MissionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61E98211CE1038A00B5B7A5 /* MissionDetailsViewController.swift */; };
 		A61E98241CE1061300B5B7A5 /* CancelButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61E98231CE1061300B5B7A5 /* CancelButtonDelegate.swift */; };
 		A61E98261CE1342D00B5B7A5 /* MissionDetailsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61E98251CE1342D00B5B7A5 /* MissionDetailsViewControllerDelegate.swift */; };
+		A61E98291CE2829300B5B7A5 /* BucketList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A61E98271CE2829200B5B7A5 /* BucketList.xcdatamodeld */; };
+		A61E982C1CE2938500B5B7A5 /* Mission+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61E982A1CE2938500B5B7A5 /* Mission+CoreDataProperties.swift */; };
+		A61E982D1CE2938500B5B7A5 /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61E982B1CE2938500B5B7A5 /* Mission.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		A61E98211CE1038A00B5B7A5 /* MissionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewController.swift; sourceTree = "<group>"; };
 		A61E98231CE1061300B5B7A5 /* CancelButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelButtonDelegate.swift; sourceTree = "<group>"; };
 		A61E98251CE1342D00B5B7A5 /* MissionDetailsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewControllerDelegate.swift; sourceTree = "<group>"; };
+		A61E98281CE2829200B5B7A5 /* BucketList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BucketList.xcdatamodel; sourceTree = "<group>"; };
+		A61E982A1CE2938500B5B7A5 /* Mission+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mission+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A61E982B1CE2938500B5B7A5 /* Mission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +50,8 @@
 		A61E98031CE0F62A00B5B7A5 = {
 			isa = PBXGroup;
 			children = (
+				A61E982A1CE2938500B5B7A5 /* Mission+CoreDataProperties.swift */,
+				A61E982B1CE2938500B5B7A5 /* Mission.swift */,
 				A61E980E1CE0F62A00B5B7A5 /* BucketList */,
 				A61E980D1CE0F62A00B5B7A5 /* Products */,
 			);
@@ -61,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				A61E980F1CE0F62A00B5B7A5 /* AppDelegate.swift */,
+				A61E98271CE2829200B5B7A5 /* BucketList.xcdatamodeld */,
 				A61E98111CE0F62A00B5B7A5 /* BucketListViewController.swift */,
 				A61E98131CE0F62A00B5B7A5 /* Main.storyboard */,
 				A61E98231CE1061300B5B7A5 /* CancelButtonDelegate.swift */,
@@ -145,10 +154,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A61E98121CE0F62A00B5B7A5 /* BucketListViewController.swift in Sources */,
+				A61E98291CE2829300B5B7A5 /* BucketList.xcdatamodeld in Sources */,
+				A61E982D1CE2938500B5B7A5 /* Mission.swift in Sources */,
 				A61E98261CE1342D00B5B7A5 /* MissionDetailsViewControllerDelegate.swift in Sources */,
 				A61E98221CE1038A00B5B7A5 /* MissionDetailsViewController.swift in Sources */,
 				A61E98241CE1061300B5B7A5 /* CancelButtonDelegate.swift in Sources */,
 				A61E98101CE0F62A00B5B7A5 /* AppDelegate.swift in Sources */,
+				A61E982C1CE2938500B5B7A5 /* Mission+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +314,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A61E98271CE2829200B5B7A5 /* BucketList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A61E98281CE2829200B5B7A5 /* BucketList.xcdatamodel */,
+			);
+			currentVersion = A61E98281CE2829200B5B7A5 /* BucketList.xcdatamodel */;
+			path = BucketList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A61E98041CE0F62A00B5B7A5 /* Project object */;
 }
