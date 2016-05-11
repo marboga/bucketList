@@ -25,10 +25,10 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         //set which we want to edit:
         if segueEditMode == true {
             if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                controller.missionToEdit = missions[indexPath.row].details
-                controller.missionToEditIndexPath = indexPath.row
+                print(missions[indexPath.row])
+                controller.missionToEdit = missions[indexPath.row]
+                segueEditMode = false
             }
-            segueEditMode = false
         }
     }
     func missionDetailsViewController(controller: MissionDetailsViewController, didFinishAddingMission missionText: String) {
@@ -60,10 +60,23 @@ class BucketListViewController: UITableViewController, CancelButtonDelegate, Mis
         print("\(error)")
         }
     }
-    func missionDetailsViewController(controller: MissionDetailsViewController, didFinishEditingMission mission: String, atIndexPath indexPath: Int) {
+    func missionDetailsViewController(controller: MissionDetailsViewController, didFinishEditingMission missionText: Mission) {
         print("attempting to finish editing")
         dismissViewControllerAnimated(true, completion: nil)
-        missions.removeAtIndex(indexPath)
+        let entity = NSEntityDescription.entityForName("Mission", inManagedObjectContext: managedObjectContext)
+        let mission = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedObjectContext)
+        mission.setValue(String(missionText), forKey: "details")
+        if managedObjectContext.hasChanges {
+            do {
+                try managedObjectContext.save()
+                
+                print("success!")
+            } catch {
+                print("\(error)")
+            }
+        }
+
+//        missions.removeAtIndex(indexPath)
 //        missions.insert(mission, atIndex: indexPath)
         tableView.reloadData()
     }

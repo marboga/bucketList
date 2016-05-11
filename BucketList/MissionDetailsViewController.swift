@@ -12,12 +12,15 @@ class MissionDetailsViewController: UITableViewController {
     @IBOutlet weak var newMissionTextField: UITextField!
     weak var cancelButtonDelegate: CancelButtonDelegate?
     weak var delegate: MissionDetailsViewControllerDelegate?
-    var missionToEdit: String?
-    var missionToEditIndexPath: Int?
+    var missionToEdit: Mission?
+//    print("ZAOOI")
+//    print(missionToEdit)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        newMissionTextField.text = missionToEdit
+        if (missionToEdit != nil) {
+            newMissionTextField.text = String(missionToEdit!.details!)
+        }
     }
     
     @IBAction func cancelBarButtonPressed(sender: UIBarButtonItem){
@@ -26,11 +29,12 @@ class MissionDetailsViewController: UITableViewController {
     
     @IBAction func doneBarButtonPressed(sender: UIBarButtonItem) {
         // if we are editing then run the "didFinishEditingMission" method
-        if var mission = missionToEdit {
-            print("made it 2", missionToEdit, missionToEditIndexPath, newMissionTextField.text)
-            mission = newMissionTextField.text!
-            delegate?.missionDetailsViewController(self, didFinishEditingMission: mission, atIndexPath: missionToEditIndexPath!)
-        } else { // we are adding so run the "didFinishAddingMission" method
+        if let mission = missionToEdit {
+            print("made it 2", missionToEdit, newMissionTextField.text)
+            mission.details = newMissionTextField.text!
+            delegate?.missionDetailsViewController(self, didFinishEditingMission: mission)
+        } else {
+            // we are adding so run the "didFinishAddingMission" method
             let mission = newMissionTextField.text!
             delegate?.missionDetailsViewController(self, didFinishAddingMission: mission)
         }
